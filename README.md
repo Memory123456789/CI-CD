@@ -31,57 +31,13 @@ Commit message: "Clarified Docker permission steps for Jenkins and Ubuntu users"
 [Pipeline] {
 [Pipeline] sh
 + docker inspect -f . maven:3.8.1-adoptopenjdk-11
-
-Error: No such object: maven:3.8.1-adoptopenjdk-11
-[Pipeline] isUnix
-[Pipeline] withEnv
-[Pipeline] {
-[Pipeline] sh
-+ docker pull maven:3.8.1-adoptopenjdk-11
-3.8.1-adoptopenjdk-11: Pulling from library/maven
-16ec32c2132b: Pulling fs layer
-3f63509f5b97: Pulling fs layer
-34d7b43f221b: Pulling fs layer
-a1931e18ae45: Pulling fs layer
-20904a3b2df7: Pulling fs layer
-fb5c0685f15f: Pulling fs layer
-a18abadafb9a: Pulling fs layer
-a1931e18ae45: Waiting
-20904a3b2df7: Waiting
-fb5c0685f15f: Waiting
-a18abadafb9a: Waiting
-3f63509f5b97: Verifying Checksum
-3f63509f5b97: Download complete
-16ec32c2132b: Verifying Checksum
-16ec32c2132b: Download complete
-20904a3b2df7: Verifying Checksum
-20904a3b2df7: Download complete
-a1931e18ae45: Verifying Checksum
-a1931e18ae45: Download complete
-fb5c0685f15f: Verifying Checksum
-fb5c0685f15f: Download complete
-a18abadafb9a: Verifying Checksum
-a18abadafb9a: Download complete
-16ec32c2132b: Pull complete
-34d7b43f221b: Verifying Checksum
-34d7b43f221b: Download complete
-3f63509f5b97: Pull complete
-34d7b43f221b: Pull complete
-a1931e18ae45: Pull complete
-20904a3b2df7: Pull complete
-fb5c0685f15f: Pull complete
-a18abadafb9a: Pull complete
-Digest: sha256:143ff7942b5ef5a004252405a31fa2813dfa438f08494fad1757029de5f64082
-Status: Downloaded newer image for maven:3.8.1-adoptopenjdk-11
-docker.io/library/maven:3.8.1-adoptopenjdk-11
-[Pipeline] }
-[Pipeline] // withEnv
+.
 [Pipeline] }
 [Pipeline] // withEnv
 [Pipeline] withDockerContainer
 Jenkins does not seem to be running inside a container
 $ docker run -t -d -u 111:113 -w /var/lib/jenkins/workspace/jenkins-pipeline -v /var/lib/jenkins/workspace/jenkins-pipeline:/var/lib/jenkins/workspace/jenkins-pipeline:rw,z -v /var/lib/jenkins/workspace/jenkins-pipeline@tmp:/var/lib/jenkins/workspace/jenkins-pipeline@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** maven:3.8.1-adoptopenjdk-11 cat
-$ docker top 6a0ef951c3b2205b096baf71ef3b949dcbb531a3fdb6c943a86eaaf2e210f081 -eo pid,comm
+$ docker top d74cf41db39ef6083e2be733f9202c3aaf755698c747eecb83d8939c982123c3 -eo pid,comm
 [Pipeline] {
 [Pipeline] sh
 + mvn --version
@@ -91,8 +47,8 @@ Java version: 11.0.11, vendor: AdoptOpenJDK, runtime: /opt/java/openjdk
 Default locale: en_US, platform encoding: UTF-8
 OS name: "linux", version: "6.8.0-1029-aws", arch: "amd64", family: "unix"
 [Pipeline] }
-$ docker stop --time=1 6a0ef951c3b2205b096baf71ef3b949dcbb531a3fdb6c943a86eaaf2e210f081
-$ docker rm -f --volumes 6a0ef951c3b2205b096baf71ef3b949dcbb531a3fdb6c943a86eaaf2e210f081
+$ docker stop --time=1 d74cf41db39ef6083e2be733f9202c3aaf755698c747eecb83d8939c982123c3
+$ docker rm -f --volumes d74cf41db39ef6083e2be733f9202c3aaf755698c747eecb83d8939c982123c3
 [Pipeline] // withDockerContainer
 [Pipeline] }
 [Pipeline] // withEnv
@@ -133,14 +89,14 @@ Commit message: "Clarified Docker permission steps for Jenkins and Ubuntu users"
 [Pipeline] withDockerContainer
 Jenkins does not seem to be running inside a container
 $ docker run -t -d -u 111:113 -w /var/lib/jenkins/workspace/jenkins-pipeline -v /var/lib/jenkins/workspace/jenkins-pipeline:/var/lib/jenkins/workspace/jenkins-pipeline:rw,z -v /var/lib/jenkins/workspace/jenkins-pipeline@tmp:/var/lib/jenkins/workspace/jenkins-pipeline@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:16-alpine cat
-$ docker top fd15ae6c2c19d22a21c59741eff46474068db2657fa05f72ba14376cb6a85e5f -eo pid,comm
+$ docker top 9acca66951f0c520ede98720d7755f1db30665288f6ba294e0e0621d057bf417 -eo pid,comm
 [Pipeline] {
 [Pipeline] sh
 + node --version
 v16.20.2
 [Pipeline] }
-$ docker stop --time=1 fd15ae6c2c19d22a21c59741eff46474068db2657fa05f72ba14376cb6a85e5f
-$ docker rm -f --volumes fd15ae6c2c19d22a21c59741eff46474068db2657fa05f72ba14376cb6a85e5f
+$ docker stop --time=1 9acca66951f0c520ede98720d7755f1db30665288f6ba294e0e0621d057bf417
+$ docker rm -f --volumes 9acca66951f0c520ede98720d7755f1db30665288f6ba294e0e0621d057bf417
 [Pipeline] // withDockerContainer
 [Pipeline] }
 [Pipeline] // withEnv
